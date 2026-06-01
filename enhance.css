@@ -1,0 +1,135 @@
+/* =============================================================
+   Connecta – enhancement layer (non-destructive)
+   Lagt på toppen av den eksisterende Elementor-siden.
+   Hus-stil: mer luft, Schibsted Grotesk, myke runde kort,
+   dempet palett, ryddet bort ødelagt seksjon.
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --c-ink: #16243f;
+  --c-navy: #1c3b6e;
+  --c-paper: #fcfbf7;
+  --c-accent: #e98b2a;
+  --shadow-soft: 0 18px 40px -22px rgba(20, 40, 90, 0.45);
+  --shadow-hover: 0 24px 50px -20px rgba(20, 40, 90, 0.55);
+  --radius: 18px;
+}
+
+/* ---- Typografi: bytt ut DM Sans / Forum med Schibsted Grotesk ---- */
+body,
+body p, body li, body a, body span, body div,
+.elementor-widget-text-editor,
+.elementor-button,
+.elementor-heading-title {
+  font-family: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif !important;
+}
+.elementor-heading-title {
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+}
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+/* ---- Varm off-white i mellomrommene, mykere ink ---- */
+html, body { background-color: var(--c-paper); }
+body { color: var(--c-ink); }
+
+/* ---- Hero-overskrift: litt mer vekt og luft ---- */
+h1.elementor-heading-title {
+  font-weight: 800 !important;
+  letter-spacing: -0.025em;
+}
+
+/* ---- Knapper: pille-form, myk tonet skygge, vennlig hover ---- */
+.elementor-button,
+.elementor-button-link,
+a.elementor-button {
+  border-radius: 999px !important;
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease !important;
+  letter-spacing: 0.01em;
+  font-weight: 600 !important;
+}
+.elementor-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ---- Bilder og kort: runde hjørner + myk skygge ---- */
+.elementor-widget-image img {
+  border-radius: var(--radius);
+}
+/* ikke rør logoen i header / footer */
+header .elementor-widget-image img,
+.site-header .elementor-widget-image img,
+footer .elementor-widget-image img,
+.elementor-location-footer .elementor-widget-image img {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Blogg-kort og generelle innholds-bokser litt mykere */
+.elementor-post,
+.elementor-post__card,
+article.elementor-post {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform .3s ease, box-shadow .3s ease;
+  background: #ffffff;
+}
+.elementor-post:hover,
+article.elementor-post:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.elementor-post__thumbnail img { border-radius: 0 !important; }
+
+/* "Sider"-rutenettet: mykere flater + løft på hover */
+.elementor-element-populated,
+.e-con-inner > .e-child {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* ---- Skjul den ødelagte/tomme testimonial-seksjonen ----
+   (Swiper-karusellen har ingen reelt innhold i den statiske speilen,
+    og vi dikter ikke opp falske anbefalinger.) */
+.elementor-element-448e223 { display: none !important; }
+
+/* ---- Mer pust mellom seksjoner ---- */
+.elementor-section.elementor-top-section,
+.e-con.e-parent {
+  scroll-margin-top: 90px;
+}
+
+/* ---- Lenker: vennligere fokus-tilstand (tilgjengelighet) ---- */
+a:focus-visible,
+.elementor-button:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---- Myk scroll ---- */
+html { scroll-behavior: smooth; }
+
+/* =============================================================
+   Scroll-reveal: starttilstand settes KUN når JS er aktiv
+   (klassen .enh-js legges på <html> av enhance.js).
+   Uten JS forblir alt synlig. Respekterer reduced-motion.
+   ============================================================= */
+.enh-js .enh-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+/* fallback-bane uten GSAP: CSS-transition når .enh-in legges på */
+.enh-js .enh-reveal.enh-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .85s cubic-bezier(.16, 1, .3, 1),
+              transform .85s cubic-bezier(.16, 1, .3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .enh-js .enh-reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
