@@ -91,6 +91,28 @@ article.elementor-post:hover {
   transition: transform .3s ease, box-shadow .3s ease;
 }
 
+/* ---- Skjul lekkende mobil-/off-canvas-meny (Responsive Menu-plugin) ----
+   I den statiske speilen initialiseres ikke plugin-JS-en, så off-canvas-
+   menyen og hamburger-knappen rendres synlig stablet øverst, over den
+   ekte headeren. Desktop-headeren (header#masthead) har allerede full nav. */
+.rmp-container,
+.rmp-menu-trigger,
+[id^="rmp-container-"],
+[id^="rmp_menu_trigger-"],
+[id^="rmp-menu-"] {
+  display: none !important;
+}
+/* Astra sin skjult-skjermleser-tittel lekker en synlig stripe øverst;
+   gjør den ordentlig visuelt skjult (beholdt for skjermleser/SEO). */
+.main-title.bhf-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  margin: -1px;
+}
+
 /* ---- Skjul den ødelagte/tomme testimonial-seksjonen ----
    (Swiper-karusellen har ingen reelt innhold i den statiske speilen,
     og vi dikter ikke opp falske anbefalinger.) */
