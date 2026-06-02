@@ -171,8 +171,11 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:500;line-height:1.08;letter-s
 .session-lock{display:flex;align-items:center;gap:.4rem;color:rgba(239,234,217,.7);font-weight:500}
 .session-lock svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .session-frame{
-  position:relative;border-radius:var(--radius-sm);min-height:210px;
-  background:linear-gradient(150deg,#274d82 0%,#13284a 100%);
+  position:relative;border-radius:var(--radius-sm);min-height:230px;
+  background:
+    linear-gradient(to top,rgba(13,30,58,.88) 0%,rgba(13,30,58,.35) 38%,rgba(13,30,58,0) 62%),
+    url("assets/kjersti.jpg") center 22%/cover no-repeat,
+    linear-gradient(150deg,#274d82 0%,#13284a 100%);
   overflow:hidden;display:flex;align-items:flex-end;padding:1.1rem;
 }
 .session-orb{
@@ -267,13 +270,9 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:500;line-height:1.08;letter-s
   display:flex;gap:1.4rem;background:var(--paper-soft);border:1px solid var(--line);
   border-radius:var(--radius);padding:clamp(1.5rem,3vw,2rem);box-shadow:var(--shadow-sm);
 }
-.person-orb{
-  flex:0 0 auto;width:74px;height:74px;border-radius:50%;position:relative;
-  background:radial-gradient(circle at 35% 30%,#E8CD86,#8B6A2F 75%);box-shadow:var(--shadow-gold);
-}
-.person-orb::after{
-  content:attr(data-initials);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--ff-display);font-weight:600;font-size:1.5rem;color:#fff;letter-spacing:.02em;
+.person-photo{
+  flex:0 0 auto;width:92px;height:92px;border-radius:50%;object-fit:cover;object-position:center top;
+  box-shadow:var(--shadow-gold);border:2px solid var(--gold-light);background:var(--green-tint);
 }
 .person-body h3{font-size:1.4rem}
 .person-role{color:var(--gold-deep);font-weight:600;font-size:.92rem;margin-bottom:.7rem}
