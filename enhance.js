@@ -84,3 +84,98 @@
     init();
   }
 })();
+
+/* =============================================================
+   Connecta - mobil-meny
+   Speilen har ingen fungerende mobilmeny (HFE-nav skjult <=1024px,
+   plugin-JS kjorer ikke). Vi bygger en ren skuff fra de eksisterende
+   menylenkene og legger den som barn av <body> (unngaar at den
+   kollapser inni en header med backdrop-filter/transform).
+   ============================================================= */
+(function () {
+  'use strict';
+
+  function build() {
+    if (document.getElementById('enh-mnav-toggle')) return;
+
+    var src = document.querySelector('#menu-1-76e1022, .hfe-nav-menu, #site-navigation, .main-navigation');
+    if (!src) return;
+
+    var items = [], seen = {};
+    src.querySelectorAll('a[href]').forEach(function (a) {
+      var t = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      var href = a.getAttribute('href');
+      if (!t || !href) return;
+      if (a.querySelector('img')) return; // hopp over logo
+      var key = href + '|' + t.toLowerCase();
+      if (seen[key]) return;
+      seen[key] = 1;
+      items.push({ t: t, href: href });
+    });
+    if (!items.length) return;
+
+    var btn = document.createElement('button');
+    btn.id = 'enh-mnav-toggle';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Apne meny');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'enh-mnav');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+
+    var overlay = document.createElement('div');
+    overlay.id = 'enh-mnav-overlay';
+
+    var panel = document.createElement('nav');
+    panel.id = 'enh-mnav';
+    panel.setAttribute('aria-label', 'Mobilmeny');
+    panel.setAttribute('aria-hidden', 'true');
+
+    var close = document.createElement('button');
+    close.id = 'enh-mnav-close';
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Lukk meny');
+    close.innerHTML = '×';
+
+    var ul = document.createElement('ul');
+    items.forEach(function (it) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = it.href;
+      a.textContent = it.t;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    panel.appendChild(close);
+    panel.appendChild(ul);
+
+    document.body.appendChild(btn);
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    function openMenu() {
+      document.body.classList.add('enh-mnav-open');
+      btn.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+    }
+    function closeMenu() {
+      document.body.classList.remove('enh-mnav-open');
+      btn.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+    }
+    btn.addEventListener('click', function () {
+      if (document.body.classList.contains('enh-mnav-open')) closeMenu(); else openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+    close.addEventListener('click', closeMenu);
+    ul.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', build);
+  } else {
+    build();
+  }
+})();
