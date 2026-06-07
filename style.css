@@ -168,14 +168,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:500;line-height:1.08;letter-s
 .hero-photo-card img{
   width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;
 }
-.session-badge{
-  position:absolute;left:-14px;bottom:-22px;z-index:4;display:flex;align-items:center;gap:.7rem;
-  background:var(--paper-soft);border:1px solid var(--line);border-radius:16px;padding:.7rem 1rem;
-  box-shadow:var(--shadow);
-}
-.session-badge svg{width:30px;height:30px;fill:var(--gold-light);stroke:var(--gold);stroke-width:.5;flex:0 0 auto}
-.session-badge strong{display:block;font-size:.92rem;color:var(--ink)}
-.session-badge span{font-size:.78rem;color:var(--ink-soft)}
 
 /* ---------- trust strip ---------- */
 .strip{border-block:1px solid var(--line);background:var(--paper-soft)}
@@ -361,7 +353,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:500;line-height:1.08;letter-s
 @media (max-width:460px){
   .strip-inner{grid-template-columns:1fr}
   .strip-item + .strip-item{border-left:0;border-top:1px solid var(--line)}
-  .session-badge{position:static;margin:1rem auto 0;width:max-content}
   .hero-actions .btn{flex:1 1 auto}
   .footer-inner{grid-template-columns:1fr}
 }
