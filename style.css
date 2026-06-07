@@ -168,14 +168,6 @@ h1,h2,h3{font-family:var(--ff-display);font-weight:500;line-height:1.08;letter-s
 .hero-photo-card img{
   width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;
 }
-.hero-photo-label{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:3rem 1.25rem 1.25rem;
-  background:linear-gradient(to top,rgba(13,30,58,.82) 0%,transparent 100%);
-  display:flex;flex-direction:column;gap:.2rem;color:#EFEAD9;
-}
-.hero-photo-label strong{font-size:1.05rem}
-.hero-photo-label span{font-size:.82rem;color:rgba(239,234,217,.72)}
 .session-badge{
   position:absolute;left:-14px;bottom:-22px;z-index:4;display:flex;align-items:center;gap:.7rem;
   background:var(--paper-soft);border:1px solid var(--line);border-radius:16px;padding:.7rem 1rem;
